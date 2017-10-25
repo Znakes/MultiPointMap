@@ -1,0 +1,25 @@
+<div ng-app="F1FeederApp" ng-controller="mapCtrl">
+  <div class="col-md-3">
+      <textarea class="form-control" rows="3"  ng-model="rowData" placeholder="Paste list of places here..."/>
+      <br>
+      <button ng-click="parseData()" type="submit" class="btn btn-default">Confirm</button>
+      <table class="table table-striped">
+        <thead>
+          <tr><th colspan="4">List of places</th></tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="place in places">
+            <td>{{$index + 1}}</td>
+            <td>{{place.address_components[0].long_name}}</td>
+          </tr>
+        </tbody>
+      </table> 
+  </div>
+
+  <div class="col-md-9">
+      <h2>The Map</h2>
+      <map id="map" center="37.7699298, -122.4469157" >
+          <marker ng-repeat="pos in places" position="{{pos.geometry.location.lat}}, {{pos.geometry.location.lng}}" icon="{path:'CIRCLE', scale: 5, strokeColor: 'red', zIndex:10}"></marker>
+      </map>
+  </div>
+</div>
